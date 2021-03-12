@@ -16,9 +16,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from contents.views import HomeView
+from django.views.generic import TemplateView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('apis/', include('apis.urls')),
     path('', HomeView.as_view(), name='contents_home'),
+    path('login/', TemplateView.as_view(template_name='login.html'), name='login')
 ]
