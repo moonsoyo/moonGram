@@ -1,0 +1,45 @@
+{% extends '_base.html' %}
+
+{% block body %} 
+<div id="login">
+    <div class="container">
+        <br>
+        <h3 class="text-center text-danger">Log In</h3><br>
+        <div class="form-group col-md-6">
+            <label for="username" class="text-danger">Username</label><br>
+            <input type="text" name="username" id="username" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="password" class="text-danger">Password</label><br>
+            <input type="password" name="password" id="username" class="form-control">
+        </div>
+        <div class="form-group col-md-6">
+            <div class="row">
+                <input type="submit" id="login" class="form-control btn btn-danger" value="submit">
+            </div>
+        </div>
+        <div class="form-group col-md-6">
+            <div class="row">
+                <a href="#" class="form-control btn btn-outline-danger">Register Here</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+  <script
+  src="https://code.jquery.com/jquery-3.6.0.min.js"
+  integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+  crossorigin="anonymous"></script>
+
+  <script>
+      $(document).ready(function (){
+          $('#login-submit').click(function() {
+              $.post('/apis/v1/users/login/', {'username': $('#username').val(), 'password': $('#password').val()}, function() {
+              location.reload();
+          }).fail(function(data) {
+              alert(data.responseJSON.message);
+          });
+      });
+    });
+  </script>
+{% endblock %}
