@@ -5,7 +5,8 @@
 {{ request.user }}
   <input type="text" id="username">
   <input type="password" id="password">
-  <button id="login-submit">Submit</button>
+  <button id="login-submit">Log In</button>
+  <button id="logout-submit">Log Out</button>
   <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
   integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -22,4 +23,14 @@
       });
     });
   </script>
+
+<script>
+    $(document).ready(function (){
+        $('#logout-submit').click(function() {
+            $.get('/apis/v1/users/logout/', {}, function() {
+            location.reload();
+        })
+    });
+  });
+</script>
   {% endblock %}

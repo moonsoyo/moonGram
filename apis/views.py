@@ -5,7 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.db import IntegrityError
 from django.core.validators import validate_email, ValidationError
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 
 # BaseView class helps exchange JSON data when developing apis.
 # If LogIn, LogOut, Sign up etc views inherit BaseView, JSON data can be exchanged.
@@ -59,4 +59,10 @@ class UserLoginView(BaseView):
             return self.response(message='This user does not exist', status=400)
         login(request, user)
 
-        return self.response
+        return self.response()
+
+    
+class UserLogoutView(BaseView):
+    def get(self, request):
+        logout(request)
+        return self.response()
